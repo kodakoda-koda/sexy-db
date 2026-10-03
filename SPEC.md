@@ -32,7 +32,7 @@
 | フロント | Vite + React + TypeScript | 画面 4 つ、状態が絡む。必要十分 |
 | グラフ | 自前の SVG | 点のタップで重なった全員を拾う処理を自前で持つため。軸は 6 種類しかなく依存を増やす必要がない |
 | 状態管理 | useState + Context | 追加ライブラリ不要 |
-| ホスティング | 未確定(Cloudflare Pages 推奨。個人サイトと別ドメインにする) | 静的配信。`VITE_BASE` でサブパスにも対応 |
+| ホスティング | GitHub Pages(公開リポジトリ、`https://kodakoda-koda.github.io/sexy-db/`) | GitHub Actions で自動デプロイ。`VITE_BASE=/sexy-db/` |
 | データ | Supabase(無料枠) | Postgres + 認証 + 画像ストレージ |
 | 認証 | Supabase Auth / Google | パスワード管理不要 |
 | PWA | manifest + 最小の service worker | ホーム画面から開ける |
@@ -154,7 +154,7 @@ Storage バケット `photos`、パスは `{user_id}/{actress_id}.jpg`。本人�
 1. Supabase アカウントとプロジェクト作成(無料)
 2. Google Cloud Console で OAuth クライアント作成(無料、課金設定不要)
    Google ログインを使うには Supabase 以外にこれが必要。
-3. GitHub リポジトリ作成とホスティング先(Cloudflare Pages など)の接続
+3. GitHub リポジトリの Secrets に SUPABASE_URL / SUPABASE_ANON_KEY を登録(デプロイと keep-alive で使用)
 
 ## 10. 配色(候補 A: ローズ × プラム)
 

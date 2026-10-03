@@ -22,8 +22,9 @@ npm run dev
 
 ## デプロイ
 
-静的サイトなので `npm run build` の `dist/` をそのまま配信する。
-サブパス配信(例: GitHub Pages の `/sexy-db/`)のときは `VITE_BASE=/sexy-db/` を付けてビルドする。
+GitHub Pages。`main` に push すると `.github/workflows/deploy.yml` がビルドして公開する。
+公開 URL: https://kodakoda-koda.github.io/sexy-db/
+リポジトリの Secrets に `SUPABASE_URL` と `SUPABASE_ANON_KEY` が必要。
 
 ### keep-alive
 
