@@ -85,7 +85,6 @@ export function RelativeSlider({ label, lo, hi, others, value, onChange }: Props
         ))}
         <div className="thumb" style={{ left: `${toPct(value)}%` }} role="slider" aria-label={label} aria-valuenow={Math.round(value)} />
       </div>
-      {!hasOthers && <div className="hint muted" style={{ fontSize: 12 }}>最初の 1 人なので基準はありません。だいたいの位置で構いません。</div>}
     </div>
   )
 }

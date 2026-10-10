@@ -11,9 +11,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['icon.svg'],
       manifest: {
-        name: 'sexy-db',
-        short_name: 'sexy-db',
-        description: '自分用の女優 DB',
+        name: '推しセクシー女優コレクション',
+        short_name: '推し女優コレクション',
+        description: '推しのセクシー女優を登録して散布図で眺める自分用コレクション',
         theme_color: '#c2185b',
         background_color: '#faf7f8',
         display: 'standalone',

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { APP_NAME } from '../appName'
 import { useAuth } from '../auth/AuthProvider'
 
 export function LoginPage() {
@@ -12,13 +13,10 @@ export function LoginPage() {
     }
   }
   return (
-    <div className="content">
-      <div className="empty">
-        <h2>sexy-db</h2>
-        <p>自分用の女優 DB。ログインして始めます。</p>
-        <button className="btn" onClick={() => void go()}>Google でログイン</button>
-        {error && <div className="error">{error}</div>}
-      </div>
+    <div className="content login">
+      <h1>{APP_NAME}</h1>
+      <button className="btn" onClick={() => void go()}>Google でログイン</button>
+      {error && <div className="error">{error}</div>}
     </div>
   )
 }

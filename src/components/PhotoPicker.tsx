@@ -14,6 +14,7 @@ export function PhotoPicker({ name, currentUrl, onChange }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [preview, setPreview] = useState<string | null>(currentUrl)
   const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     return () => {
@@ -24,10 +25,14 @@ export function PhotoPicker({ name, currentUrl, onChange }: Props) {
   const pick = async (file: File | undefined) => {
     if (!file) return
     setBusy(true)
+    setError(null)
     try {
       const blob = await resizeImage(file)
       setPreview(URL.createObjectURL(blob))
       onChange(blob)
+    } catch (e) {
+      // 写真は変更なし扱いのまま、理由だけ出す
+      setError(e instanceof Error ? e.message : String(e))
     } finally {
       setBusy(false)
       if (inputRef.current) inputRef.current.value = ''
@@ -40,20 +45,16 @@ export function PhotoPicker({ name, currentUrl, onChange }: Props) {
   }
 
   return (
-    <div className="field">
-      <label>写真(任意)</label>
-      <div className="row" style={{ alignItems: 'center' }}>
-        <div style={{ flex: 'none' }}>
-          <Avatar name={name || '?'} photoUrl={preview} size={72} />
-        </div>
+    <div className="photo-picker">
+      <Avatar name={name || '?'} photoUrl={preview} size={64} />
+      <div className="buttons">
         <button type="button" className="btn outline small" disabled={busy} onClick={() => inputRef.current?.click()}>
-          {busy ? '変換中…' : preview ? '変更' : '選ぶ'}
+          {busy ? '変換中…' : preview ? '写真を変更' : '写真を選ぶ'}
         </button>
         {preview && (
-          <button type="button" className="btn ghost small" onClick={clear}>
-            削除
-          </button>
+          <button type="button" className="btn text small" onClick={clear}>写真を外す</button>
         )}
+        {error && <div className="error">{error}</div>}
       </div>
       <input
         ref={inputRef}
@@ -62,7 +63,6 @@ export function PhotoPicker({ name, currentUrl, onChange }: Props) {
         style={{ display: 'none' }}
         onChange={(e) => void pick(e.target.files?.[0])}
       />
-      <div className="hint">長辺 400px に縮小して保存します</div>
     </div>
   )
 }

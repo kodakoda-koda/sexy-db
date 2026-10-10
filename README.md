@@ -1,6 +1,6 @@
-# sexy-db
+# sexy-db(推しセクシー女優コレクション)
 
-自分用の女優 DB。6 軸(身長・年齢・胸・肉付き・骨格・顔)から 2 軸を選んだ散布図で眺める。
+推しのセクシー女優を登録して眺める自分用アプリ。6 軸(身長・年齢・胸・肉付き・骨格・顔)から 2 軸を選んだ散布図で比較できる。
 仕様は [SPEC.md](./SPEC.md)。
 
 ## 開発
@@ -36,6 +36,16 @@ Supabase 無料枠は 7 日間アクセスがないと停止するため、`.git
 - `src/domain` 型、カップ換算、年齢計算、相対値の正規化、軸定義
 - `src/repo` 保存先の抽象(`Repository`)と実装(Supabase / localStorage)
 - `src/auth` Google ログイン
-- `src/state` 登録データの読み込みと CRUD、正規化関数
-- `src/components` 相対指定スライダー、散布図(SVG)、カードなど
-- `src/pages` 一覧・散布図・追加/編集・詳細・ログイン
+- `src/state` 登録データの読み込みと CRUD、正規化関数、取り消し付き削除
+- `src/components` 相対指定スライダー、散布図(SVG)、散布図ビュー(ホバー/固定)、カードなど
+- `src/pages` 女優コレクション(一覧・散布図)、女優シングル(閲覧・編集・新規)、ログイン
+- `src/appName.ts` 画面に出すアプリ名
+
+## UI 設計
+
+OOUI(オブジェクト指向 UI)で設計している。設計の正本は `design/` にある。
+
+- `design/ui-redesign/OOUI_DESIGN.md` メインオブジェクト・ビュー構成・レイアウト・変更点・例外状態
+- `design/ui-redesign/EXISTING_UI_MAP.md` 改修前の UI の記録(As-Is)
+- `design/visual-tokens.md` 色・文字・部品の値、`design/visual-system.md` 面・色・操作・部品の役割
+- `design/ui-redesign/preview/` 実装のスクリーンショット(スマホ 375×667 / PC 1280×800)
